@@ -61,6 +61,40 @@ Detailed pages for 15+ ski resorts with live mountain webcams, terrain stats, tr
 - **Nevada DOT** — Cameras, message signs, road conditions
 - **Colorado DOT** — Chain laws, road conditions, cameras
 - **CHP** — Real-time California highway incidents
+- **Snow Go Go Resort API** — Lift status, trail conditions, snow reports (see below)
+
+---
+
+## Snow Go Go Resort API
+
+A companion data aggregation service that powers the resort information on Snow Go Go. Collects and normalizes real-time data from resort websites into a unified API.
+
+### Features
+- **Lift Status** — Open, closed, hold, or scheduled states for every lift
+- **Trail Conditions** — Open/closed status with grooming info and difficulty levels
+- **Snow Reports** — Base depth, summit depth, and recent snowfall
+- **Weather** — Temperature, conditions, and wind at each resort
+- **Mountain Zones** — Trails and lifts organized by geographic area
+
+### Coverage
+- **Lake Tahoe** — 11 resorts (Palisades, Northstar, Heavenly, Kirkwood, Sugar Bowl, etc.)
+- **Colorado** — I-70 corridor resorts
+- **Utah** — In development
+
+### Tech Stack
+| Component | Technology |
+|-----------|------------|
+| Runtime | Node.js |
+| Automation | GitHub Actions (runs every 15 minutes) |
+| Output | Static JSON via GitHub Pages |
+| Data Collection | Resort APIs + web scraping where needed |
+
+### Architecture
+```
+Resort Websites → Crawlers → Normalize to Schema → JSON API → Snow Go Go Frontend
+```
+
+Each resort has a dedicated crawler that handles its specific data format. All data is normalized to a common schema before being published, allowing the frontend to consume resort data uniformly regardless of source.
 
 ---
 
